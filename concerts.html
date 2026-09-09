@@ -1,0 +1,286 @@
+<meta charset="utf-8">
+<title>曹揚歷年活動</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .concert-poster:not(.empty) { cursor: zoom-in; }
+
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .lightbox-overlay[hidden] { display: none; }
+  .lightbox-overlay img {
+    max-width: 88vw;
+    max-height: 84vh;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+  .lightbox-close { top: 24px; right: 32px; font-size: 1.8rem; line-height: 1; }
+  .lightbox-prev, .lightbox-next { top: 50%; transform: translateY(-50%); font-size: 2.4rem; padding: 12px 18px; }
+  .lightbox-prev { left: 12px; }
+  .lightbox-next { right: 12px; }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { color: var(--muted-2); }
+  .lightbox-count {
+    position: absolute;
+    bottom: 24px; left: 50%; transform: translateX(-50%);
+    color: var(--muted-2);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<div class="masthead">
+  <div class="masthead-photo"><img src="images/hero-homepage-banner.jpg" alt="鋼琴家 曹揚"></div>
+  <div class="masthead-top">
+    <div class="wordmark">曹揚 YANG TSAO<small>PIANIST / PIANO EDUCATOR</small></div>
+    <nav>
+      <a href="index.html">首頁</a>
+      <a href="about.html">關於</a>
+      <a href="services.html">服務項目</a>
+      <a href="concerts.html" class="active">活動</a>
+      <a href="videos.html">影片</a>
+      <a href="gallery.html">相片</a>
+      <a href="contact.html">聯絡</a>
+    </nav>
+  </div>
+  <div class="masthead-title"><h1>歷年活動<span class="en">EVENTS</span></h1></div>
+</div>
+
+<section class="light-section">
+  <div class="wrap concert-grid" id="concerts-list">
+
+  </div>
+</section>
+
+<div class="lightbox-overlay" id="lightbox" hidden>
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="關閉">&times;</button>
+  <button class="lightbox-prev" onclick="stepLightbox(-1)" aria-label="上一張">&#8249;</button>
+  <img id="lightbox-img" src="" alt="放大檢視海報">
+  <button class="lightbox-next" onclick="stepLightbox(1)" aria-label="下一張">&#8250;</button>
+  <div class="lightbox-count" id="lightbox-count"></div>
+</div>
+
+<footer id="contact-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>曹揚 YANG TSAO</h3>
+      <p>鋼琴家 / 鋼琴教育家<br>台北市信義區 — 一對一鋼琴教學</p>
+    </div>
+    <div>
+      <h3>聯絡方式</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/%E6%9B%B9%E6%8F%9A-Yang-Tsao-2254568101253152/" target="_blank" rel="noopener">Facebook 粉絲專頁</a></li>
+        <li><a href="contact.html">聯絡表單</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>網站導覽</h3>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="about.html">關於</a></li>
+        <li><a href="services.html">服務項目</a></li>
+        <li><a href="concerts.html">活動</a></li>
+        <li><a href="videos.html">影片</a></li>
+        <li><a href="gallery.html">相片</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Yang Tsao. All rights reserved.</span>
+    <span>Site design draft — 2026-09</span>
+  </div>
+</footer>
+
+
+<script>
+  var lightboxIndex = 0;
+
+  function getPosterImgs() {
+    return Array.prototype.slice.call(document.querySelectorAll('#concerts-list .concert-poster:not(.empty) img'));
+  }
+  function openLightboxAt(img) {
+    var imgs = getPosterImgs();
+    lightboxIndex = imgs.indexOf(img);
+    renderLightbox(imgs);
+    document.getElementById('lightbox').hidden = false;
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').hidden = true;
+  }
+  function stepLightbox(delta) {
+    var imgs = getPosterImgs();
+    lightboxIndex = (lightboxIndex + delta + imgs.length) % imgs.length;
+    renderLightbox(imgs);
+  }
+  function renderLightbox(imgs) {
+    var img = imgs[lightboxIndex];
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-count').textContent = (lightboxIndex + 1) + ' / ' + imgs.length;
+  }
+  // Event delegation on the (always-present) container — works whether the
+  // concert cards are already there (artifact build) or arrive later via
+  // fetch (deploy build's loadConcerts()), no re-attach step needed.
+  document.getElementById('concerts-list').addEventListener('click', function(e) {
+    var poster = e.target.closest('.concert-poster:not(.empty)');
+    if (!poster) return;
+    openLightboxAt(poster.querySelector('img'));
+  });
+  document.addEventListener('keydown', function(e) {
+    var lb = document.getElementById('lightbox');
+    if (lb.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') stepLightbox(-1);
+    if (e.key === 'ArrowRight') stepLightbox(1);
+  });
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+</script>
+<script>// Reads data from a published Google Sheet (no API key needed) via the gviz
+// endpoint. Each page fetches whichever tab(s) it needs and renders its own
+// list — see the bottom of this file for per-page render calls.
+//
+// SETUP: one Google Sheet with 3 tabs named exactly: concerts, videos, awards.
+// Shared as "Anyone with the link" -> Viewer. Sheet ID is the part of its URL
+// between /d/ and /edit.
+const SHEET_ID = '1hfDZzsPNNuFxcWL_-Qg_e04K7XpDO9H5';
+
+function fetchSheetTab(tabName) {
+  // headers=1 tells Google's gviz endpoint row 1 is a header row — without
+  // it, column labels come back empty and the header row itself shows up
+  // as a fake first data row (found by testing against the real sheet).
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+    '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(tabName);
+  return fetch(url)
+    .then(function(r) {
+      if (!r.ok) throw new Error('sheet fetch failed: ' + r.status);
+      return r.text();
+    })
+    .then(function(text) {
+      var start = text.indexOf('(');
+      var end = text.lastIndexOf(')');
+      var json = JSON.parse(text.substring(start + 1, end));
+      var cols = json.table.cols.map(function(c) { return c.label || c.id; });
+      return json.table.rows.map(function(row) {
+        var obj = {};
+        row.c.forEach(function(cell, i) {
+          obj[cols[i]] = cell ? (cell.f !== null && cell.f !== undefined ? cell.f : cell.v) : '';
+        });
+        return obj;
+      });
+    });
+}
+
+function escapeHtml(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ---- concerts (used by concerts.html full list, and homepage.html teaser) ----
+function renderEventRow(r) {
+  var hasPoster = r.poster_url && String(r.poster_url).trim() !== '';
+  var poster = hasPoster
+    ? '<img src="' + escapeHtml(r.poster_url) + '" alt="' + escapeHtml(r.title) + ' 海報">'
+    : '';
+  return '<div class="concert-card">' +
+    '<div class="concert-poster' + (hasPoster ? '' : ' empty') + '">' + poster + '</div>' +
+    '<div class="concert-meta">' +
+    '<div class="concert-date">' + escapeHtml(r.date) + '</div>' +
+    '<div class="concert-title">' + escapeHtml(r.title) + '</div>' +
+    '<div class="concert-venue">' + escapeHtml(r.venue) + '</div>' +
+    '</div></div>';
+}
+
+function loadConcerts(containerId, limit) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('concerts').then(function(rows) {
+    rows.sort(function(a, b) { return String(b.date).localeCompare(String(a.date)); });
+    if (limit) rows = rows.slice(0, limit);
+    el.innerHTML = rows.map(renderEventRow).join('');
+  }).catch(function(err) {
+    el.innerHTML = '<p style="color:var(--muted)">目前無法載入音樂會資料，請稍後再試。</p>';
+    console.error(err);
+  });
+}
+
+// ---- awards (used by about.html full list, and homepage.html teaser) ----
+function renderAwardRow(r) {
+  return '<li><b>' + escapeHtml(r.year) + '</b> ' + escapeHtml(r.description) + '</li>';
+}
+
+function loadAwards(containerId, limit) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('awards').then(function(rows) {
+    rows.sort(function(a, b) { return String(b.year).localeCompare(String(a.year)); });
+    if (limit) rows = rows.slice(0, limit);
+    el.innerHTML = rows.map(renderAwardRow).join('');
+  }).catch(function(err) {
+    el.innerHTML = '<li style="color:var(--muted)">目前無法載入資料，請稍後再試。</li>';
+    console.error(err);
+  });
+}
+
+// ---- videos (used by videos.html) ----
+function renderVideoCard(r) {
+  var thumbUrl = 'https://img.youtube.com/vi/' + encodeURIComponent(r.youtube_id) + '/hqdefault.jpg';
+  return '<div class="video-card" data-cat="' + escapeHtml(r.category) + '" data-video-id="' +
+    escapeHtml(r.youtube_id) + '" data-title="' + escapeHtml(r.title) +
+    '"' + (r.category === 'classical' ? '' : ' hidden') + '>' +
+    '<div class="video-thumb"><img src="' + thumbUrl + '" alt="' + escapeHtml(r.title) + '">' +
+    '<div class="play-btn"></div></div>' +
+    '<div class="video-title">' + escapeHtml(r.title) + '</div></div>';
+}
+
+function loadVideos(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('videos').then(function(rows) {
+    // No date column to sort by — instead, newest-added row (bottom of the
+    // sheet) shows first, same "always add at the bottom" convention as
+    // concerts/awards.
+    rows.reverse();
+    el.innerHTML = rows.map(renderVideoCard).join('');
+    attachVideoFacade();
+  }).catch(function(err) {
+    el.innerHTML = '<p style="color:var(--muted)">目前無法載入影片資料，請稍後再試。</p>';
+    console.error(err);
+  });
+}
+
+function attachVideoFacade() {
+  document.querySelectorAll('.video-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      var card = thumb.closest('.video-card');
+      var id = card.dataset.videoId;
+      var title = card.dataset.title;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      thumb.replaceChildren(iframe);
+    });
+  });
+}
+</script>
+<script>loadConcerts('concerts-list');</script>

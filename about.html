@@ -1,0 +1,205 @@
+<meta charset="utf-8">
+<title>關於曹揚</title>
+<link rel="stylesheet" href="style.css">
+<style>
+</style>
+
+<div class="masthead">
+  <div class="masthead-photo"><img src="images/hero-homepage-banner.jpg" alt="鋼琴家 曹揚 Yang Tsao"></div>
+  <div class="masthead-top">
+    <div class="wordmark">曹揚 YANG TSAO<small>PIANIST / PIANO EDUCATOR</small></div>
+    <nav>
+      <a href="index.html">首頁</a>
+      <a href="about.html" class="active">關於</a>
+      <a href="services.html">服務項目</a>
+      <a href="concerts.html">活動</a>
+      <a href="videos.html">影片</a>
+      <a href="gallery.html">相片</a>
+      <a href="contact.html">聯絡</a>
+    </nav>
+  </div>
+  <div class="masthead-title"><h1>關於<span class="en">ABOUT</span></h1></div>
+</div>
+
+<section class="dark-section">
+  <div class="wrap two-col">
+    <div class="photo-block">
+      <img src="images/headshot-portrait-img-3276.jpg" alt="曹揚 Yang Tsao">
+      <div class="awards-block">
+        <div class="awards-heading">獲獎與評審經歷<span class="en">AWARDS &amp; JURY</span></div>
+        <ul class="awards" id="awards-list">
+
+        </ul>
+      </div>
+    </div>
+    <div>
+      <p>旅歐青年鋼琴家曹揚，1989 年出生於台灣台北，5 歲開始接觸鋼琴，2008 年獲全國學生音樂比賽鋼琴獨奏高中 B 組特優第二名，2012 年以優異的成績畢業於臺北市立教育大學音樂系，主修鋼琴，曾師事張恒愷老師、王穎教授、歐玲如教授。</p>
+      <p>2014 年獲獎學金赴英國皇家伯明罕音樂院攻讀鋼琴演奏碩士，並以「最高榮譽」(Distinction) 之殊榮畢業。旅歐期間師事 Julian Jacobson 以及 David Quigley，並曾接受許多鋼琴家之指導：莊雅斐、嚴俊傑、安寧、胡瀞云、David Fung、William Heiles、Vitali Berzon、Evelyn Chen、Daniel Pollack、Colin Stone、Ian Jones、Jakob Fichert、Peter Donohoe、Müza Rubackyte、Robert Levin、Tamás Vásáry 等著名鋼琴家。</p>
+      <p>於歐洲就讀期間積極參與各項校內外演出活動及比賽，曾入圍 Beryl Chempin 貝多芬獎、Ambache Women Composer Prize 以及伯明罕音樂學院鋼琴大賽之決賽。2017 年獲選為新北市「樂壇新星」以及 2018「巴赫新聲」，並於新北市藝文中心演藝廳以及台北巴赫廳舉行個人獨奏會。</p>
+      <p>結束英國的學業後，獲全額獎學金取得匈牙利李斯特音樂學院演奏文憑，師事名鋼琴家 Balázs Szokolay 以及 László Borbély。返台後，除了活躍於國內外的演出，也經常應邀舉辦鋼琴講座、專題演講，並擔任重要音樂比賽之評審委員。</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>曹揚 YANG TSAO</h3>
+      <p>鋼琴家 / 鋼琴教育家<br>台北市信義區 — 一對一鋼琴教學</p>
+    </div>
+    <div>
+      <h3>聯絡方式</h3>
+      <ul>
+        <li><a href="https://www.facebook.com/%E6%9B%B9%E6%8F%9A-Yang-Tsao-2254568101253152/" target="_blank" rel="noopener">Facebook 粉絲專頁</a></li>
+        <li><a href="contact.html">聯絡表單</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>網站導覽</h3>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="about.html">關於</a></li>
+        <li><a href="services.html">服務項目</a></li>
+        <li><a href="concerts.html">活動</a></li>
+        <li><a href="videos.html">影片</a></li>
+        <li><a href="gallery.html">相片</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Yang Tsao. All rights reserved.</span>
+    <span>Site design draft — 2026-09</span>
+  </div>
+</footer>
+
+<script>// Reads data from a published Google Sheet (no API key needed) via the gviz
+// endpoint. Each page fetches whichever tab(s) it needs and renders its own
+// list — see the bottom of this file for per-page render calls.
+//
+// SETUP: one Google Sheet with 3 tabs named exactly: concerts, videos, awards.
+// Shared as "Anyone with the link" -> Viewer. Sheet ID is the part of its URL
+// between /d/ and /edit.
+const SHEET_ID = '1hfDZzsPNNuFxcWL_-Qg_e04K7XpDO9H5';
+
+function fetchSheetTab(tabName) {
+  // headers=1 tells Google's gviz endpoint row 1 is a header row — without
+  // it, column labels come back empty and the header row itself shows up
+  // as a fake first data row (found by testing against the real sheet).
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+    '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(tabName);
+  return fetch(url)
+    .then(function(r) {
+      if (!r.ok) throw new Error('sheet fetch failed: ' + r.status);
+      return r.text();
+    })
+    .then(function(text) {
+      var start = text.indexOf('(');
+      var end = text.lastIndexOf(')');
+      var json = JSON.parse(text.substring(start + 1, end));
+      var cols = json.table.cols.map(function(c) { return c.label || c.id; });
+      return json.table.rows.map(function(row) {
+        var obj = {};
+        row.c.forEach(function(cell, i) {
+          obj[cols[i]] = cell ? (cell.f !== null && cell.f !== undefined ? cell.f : cell.v) : '';
+        });
+        return obj;
+      });
+    });
+}
+
+function escapeHtml(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ---- concerts (used by concerts.html full list, and homepage.html teaser) ----
+function renderEventRow(r) {
+  var hasPoster = r.poster_url && String(r.poster_url).trim() !== '';
+  var poster = hasPoster
+    ? '<img src="' + escapeHtml(r.poster_url) + '" alt="' + escapeHtml(r.title) + ' 海報">'
+    : '';
+  return '<div class="concert-card">' +
+    '<div class="concert-poster' + (hasPoster ? '' : ' empty') + '">' + poster + '</div>' +
+    '<div class="concert-meta">' +
+    '<div class="concert-date">' + escapeHtml(r.date) + '</div>' +
+    '<div class="concert-title">' + escapeHtml(r.title) + '</div>' +
+    '<div class="concert-venue">' + escapeHtml(r.venue) + '</div>' +
+    '</div></div>';
+}
+
+function loadConcerts(containerId, limit) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('concerts').then(function(rows) {
+    rows.sort(function(a, b) { return String(b.date).localeCompare(String(a.date)); });
+    if (limit) rows = rows.slice(0, limit);
+    el.innerHTML = rows.map(renderEventRow).join('');
+  }).catch(function(err) {
+    el.innerHTML = '<p style="color:var(--muted)">目前無法載入音樂會資料，請稍後再試。</p>';
+    console.error(err);
+  });
+}
+
+// ---- awards (used by about.html full list, and homepage.html teaser) ----
+function renderAwardRow(r) {
+  return '<li><b>' + escapeHtml(r.year) + '</b> ' + escapeHtml(r.description) + '</li>';
+}
+
+function loadAwards(containerId, limit) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('awards').then(function(rows) {
+    rows.sort(function(a, b) { return String(b.year).localeCompare(String(a.year)); });
+    if (limit) rows = rows.slice(0, limit);
+    el.innerHTML = rows.map(renderAwardRow).join('');
+  }).catch(function(err) {
+    el.innerHTML = '<li style="color:var(--muted)">目前無法載入資料，請稍後再試。</li>';
+    console.error(err);
+  });
+}
+
+// ---- videos (used by videos.html) ----
+function renderVideoCard(r) {
+  var thumbUrl = 'https://img.youtube.com/vi/' + encodeURIComponent(r.youtube_id) + '/hqdefault.jpg';
+  return '<div class="video-card" data-cat="' + escapeHtml(r.category) + '" data-video-id="' +
+    escapeHtml(r.youtube_id) + '" data-title="' + escapeHtml(r.title) +
+    '"' + (r.category === 'classical' ? '' : ' hidden') + '>' +
+    '<div class="video-thumb"><img src="' + thumbUrl + '" alt="' + escapeHtml(r.title) + '">' +
+    '<div class="play-btn"></div></div>' +
+    '<div class="video-title">' + escapeHtml(r.title) + '</div></div>';
+}
+
+function loadVideos(containerId) {
+  var el = document.getElementById(containerId);
+  if (!el) return;
+  fetchSheetTab('videos').then(function(rows) {
+    // No date column to sort by — instead, newest-added row (bottom of the
+    // sheet) shows first, same "always add at the bottom" convention as
+    // concerts/awards.
+    rows.reverse();
+    el.innerHTML = rows.map(renderVideoCard).join('');
+    attachVideoFacade();
+  }).catch(function(err) {
+    el.innerHTML = '<p style="color:var(--muted)">目前無法載入影片資料，請稍後再試。</p>';
+    console.error(err);
+  });
+}
+
+function attachVideoFacade() {
+  document.querySelectorAll('.video-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      var card = thumb.closest('.video-card');
+      var id = card.dataset.videoId;
+      var title = card.dataset.title;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      thumb.replaceChildren(iframe);
+    });
+  });
+}
+</script>
+<script>loadAwards('awards-list');</script>
