@@ -166,6 +166,7 @@
     text-decoration: none; border: 1px solid var(--ink); padding: 12px 24px; background: none; color: var(--ink);
     font-family: 'Open Sans', sans-serif; cursor: pointer;
   }
+  .see-all-wrap { text-align: center; margin-top: 40px; }
   .see-all:hover, .btn:hover { background: var(--ink); color: var(--paper); }
   .dark-section .btn, .dark-section .see-all { border-color: var(--paper); color: var(--paper); }
   .dark-section .btn:hover, .dark-section .see-all:hover { background: var(--paper); color: var(--ink); }
