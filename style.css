@@ -206,6 +206,7 @@
   .faq { max-width: 760px; }
   .faq details { border-top: 1px solid var(--rule-light); padding: 16px 0; }
   .faq details:last-child { border-bottom: 1px solid var(--rule-light); }
+  .faq details:first-child { border-top: none; padding-top: 0; }
   .faq summary { cursor: pointer; font-weight: 600; }
   .faq details p { margin: 10px 0 0; color: #555; }
   /* cards stack below 900px; featured card moves to the top */
