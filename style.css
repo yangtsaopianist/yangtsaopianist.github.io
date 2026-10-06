@@ -51,6 +51,11 @@
     border-bottom: 1px solid var(--paper); padding-bottom: 3px;
   }
 
+  /* education list above homepage bio */
+  .edu-stack { list-style: none; padding: 0 0 0 18px; margin: 0 0 30px; border-left: 2px solid var(--paper); display: flex; flex-direction: column; gap: 12px; }
+  .edu-stack li { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--paper); }
+  .edu-stack small { font-family: 'Open Sans', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--muted); margin-left: 12px; }
+
   /* events teaser section (homepage only — full events list page uses .light-section directly) */
   .events-section { background: var(--paper); color: var(--ink); padding: 64px 0; }
   .events-section .heading { color: var(--ink); }
@@ -258,6 +263,7 @@
     .hero-top { padding: 24px 22px; }
     .hero-caption { padding: 0 22px 28px; }
     .bio-grid { grid-template-columns: 1fr; }
+    .edu-stack small { display: block; margin: 4px 0 0; }
     .two-col, .two-col.reverse { grid-template-columns: 1fr; }
     .concert-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
     /* nav spans the full row under the wordmark, links spread edge to edge */
