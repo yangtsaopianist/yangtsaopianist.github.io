@@ -179,7 +179,7 @@
   /* services page sections */
   .services-intro { padding: 44px 0; }
   .services-lead { font-size: 1.05rem; color: #333; max-width: 62ch; margin: 0 0 18px; }
-  .jump-links { display: flex; flex-wrap: wrap; gap: 26px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
+  .jump-links { display: flex; flex-wrap: wrap; gap: 14px 44px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
   .jump-links a { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
   .sub-heading { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.04em; margin: 32px 0 8px; }
   .flow { padding-left: 1.3em; margin: 0 0 28px; }
