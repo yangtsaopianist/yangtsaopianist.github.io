@@ -104,6 +104,9 @@
   nav { display: flex; flex-wrap: wrap; gap: 26px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
   nav a { text-decoration: none; padding: 8px 2px; border-bottom: 2px solid transparent; color: var(--ink); white-space: nowrap; }
   nav a.active { border-bottom-color: var(--ink); }
+  /* small grey English label under each nav item; desktop only (hidden ≤760px below) */
+  nav a:has(.nav-en) { text-align: center; }
+  .nav-en { display: block; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.14em; color: var(--muted); margin-top: 2px; }
   nav a:hover { border-bottom-color: var(--muted-2); }
   .masthead-title {
     position: relative; z-index: 1; margin-top: auto; padding: 0 40px 30px;
@@ -269,5 +272,6 @@
     .concert-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
     /* nav spans the full row under the wordmark, links spread edge to edge */
     nav { width: 100%; flex-wrap: nowrap; justify-content: space-between; gap: 0; font-size: 0.78rem; }
+    .nav-en { display: none; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   }
