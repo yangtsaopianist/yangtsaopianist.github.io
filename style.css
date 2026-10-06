@@ -176,6 +176,26 @@
   .service-list li { font-size: 1rem; }
   .service-list .label { font-weight: 700; display: block; font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
 
+  /* services page sections */
+  .services-intro { padding: 44px 0; }
+  .services-lead { font-size: 1.05rem; color: #333; max-width: 62ch; margin: 0 0 18px; }
+  .jump-links { display: flex; flex-wrap: wrap; gap: 26px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
+  .jump-links a { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+  .sub-heading { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.04em; margin: 32px 0 8px; }
+  .flow { padding-left: 1.3em; margin: 0 0 28px; }
+  .flow li { margin-bottom: 6px; }
+  .dark-section .flow li { color: #E8E8E8; }
+  .faq { max-width: 760px; }
+  .faq details { border-top: 1px solid var(--rule-light); padding: 16px 0; }
+  .faq details:last-child { border-bottom: 1px solid var(--rule-light); }
+  .faq summary { cursor: pointer; font-weight: 600; }
+  .faq details p { margin: 10px 0 0; color: #555; }
+  .services-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .services-pair p { max-width: 62ch; margin: 0 0 18px; }
+  .text-link { border-bottom: 1px solid currentColor; text-decoration: none; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  #teaching, #performance, #collab, #faq { scroll-margin-top: 16px; }
+
   /* video tabs */
   .tab-row { display: flex; gap: 12px; margin-bottom: 32px; }
   .tab-btn {
@@ -226,6 +246,7 @@
     .hero-caption { padding: 0 22px 28px; }
     .bio-grid { grid-template-columns: 1fr; }
     .two-col, .two-col.reverse { grid-template-columns: 1fr; }
+    .services-pair { grid-template-columns: 1fr; }
     .concert-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
     /* nav spans the full row under the wordmark, links spread edge to edge */
     nav { width: 100%; flex-wrap: nowrap; justify-content: space-between; gap: 0; font-size: 0.78rem; }
